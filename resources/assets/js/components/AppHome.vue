@@ -20,13 +20,30 @@ import footers from './Footer';
 
 export default {
     components:{toolbar,  carousel, ourcompany, advertiser, meetourteam, footers},
-    // onMounted(){
-    //     var wholePage = Dom.getElementbytag('div')
-    //     on
-    // }
+    mounted(){
+        window.addEventListener('scroll', function(){
+            let menuArea = document.getElementById('app');
+
+            if(window.pageYOffset > 0){
+                menuArea.classList.add('cus-nav');
+                
+            }else{
+                menuArea.classList.remove('cus-nav')
+            }
+        })
+        
+    }
 }
 </script>
 
 <style>
+#app.cus-nav{
+    background: #262626;
 
+}
+
+#app.cus-nav a{
+    color: #fff;
+    
+}
 </style>

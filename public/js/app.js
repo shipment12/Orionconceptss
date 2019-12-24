@@ -87984,7 +87984,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n#app.cus-nav{\r\n    background: #262626;\n}\n#app.cus-nav a{\r\n    color: #fff;\n}\r\n", ""]);
 
 // exports
 
@@ -88061,11 +88061,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { toolbar: __WEBPACK_IMPORTED_MODULE_0__Toolbar___default.a, carousel: __WEBPACK_IMPORTED_MODULE_1__Carousel___default.a, ourcompany: __WEBPACK_IMPORTED_MODULE_2__Ourcompany___default.a, advertiser: __WEBPACK_IMPORTED_MODULE_3__Advertiser___default.a, meetourteam: __WEBPACK_IMPORTED_MODULE_4__MeetourTeam___default.a, footers: __WEBPACK_IMPORTED_MODULE_5__Footer___default.a }
-    // onMounted(){
-    //     var wholePage = Dom.getElementbytag('div')
-    //     on
-    // }
+    components: { toolbar: __WEBPACK_IMPORTED_MODULE_0__Toolbar___default.a, carousel: __WEBPACK_IMPORTED_MODULE_1__Carousel___default.a, ourcompany: __WEBPACK_IMPORTED_MODULE_2__Ourcompany___default.a, advertiser: __WEBPACK_IMPORTED_MODULE_3__Advertiser___default.a, meetourteam: __WEBPACK_IMPORTED_MODULE_4__MeetourTeam___default.a, footers: __WEBPACK_IMPORTED_MODULE_5__Footer___default.a },
+    mounted: function mounted() {
+        window.addEventListener('scroll', function () {
+            var menuArea = document.getElementById('app');
+
+            if (window.pageYOffset > 0) {
+                menuArea.classList.add('cus-nav');
+            } else {
+                menuArea.classList.remove('cus-nav');
+            }
+        });
+    }
 });
 
 /***/ }),
