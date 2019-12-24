@@ -1,6 +1,6 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-   <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light  fixed-top">
+   <div class="container-fluid">
   <a class="navbar-brand" href="#">Orion Concepts</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -49,11 +49,35 @@
 
 <script>
 export default {
+  mounted(){
+        window.addEventListener('scroll', function(){
+            let menuArea = document.getElementById('app');
+
+            if(window.pageYOffset > 0){
+                menuArea.classList.add('cus-nav');
+                
+            }else{
+                menuArea.classList.remove('cus-nav')
+            }
+        })
+        
+    }
     
 }
 </script>
 
-<style>
+<style scoped>
+
+#app.cus-nav nav{
+    background: #070606;
+
+}
+
+#app.cus-nav a{
+    color: rgb(229, 241, 234);
+    
+}
+
 .navbar-nav a{
     font-family: poppins;
     font-size: 18px;
@@ -86,7 +110,7 @@ navbar-light .navbar-nav .action > .nav-link, .navbar-light .navbar-nav .nav-lin
 }
 
 .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
-    color: rgb(55, 13, 80) !important;
+    color: rgb(236, 8, 8) !important;
 }
 .navbar-light:hover{
   color: rgb(26, 51, 63) !important;

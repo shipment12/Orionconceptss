@@ -28,8 +28,10 @@ Vue.use(Vuetify)
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('AppHome', require('./components/AppHome.vue'));
 
+import router from './Router/router.js';
 const app = new Vue({
-    el: '#app',
+	el: '#app',
+	router,
     
     vuetify: new Vuetify({
     	theme: {
