@@ -1,27 +1,41 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-light  fixed-top">
+
+  <!-- <nav class="navbar navbar-dark bg-primary fixed-top"> -->
    <div class="container-fluid">
+     <router-link to='/'>
   <a class="navbar-brand" href="#">Orion Concepts</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  </router-link>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
+    
+        
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav ml-auto" >
+
+      <router-link to='/'>
       <li class="nav-item active">
         <a class="nav-link" href="#">Home </a>
       </li>
+      </router-link>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
 
+      <router-link to='/advertisersignup'>
       <li class="nav-item">
         <a class="nav-link" href="#">Advertiser</a>
       </li>
+      </router-link>
 
+    <router-link to='/publishersignup'>
       <li class="nav-item">
         <a class="nav-link" href="#">Publisher</a>
       </li>
+    </router-link>
 
       <li class="nav-item">
         <a class="nav-link" href="#">Blog</a>
@@ -35,9 +49,12 @@
         <a class="nav-link" href="#">Contact Us</a>
       </li>
 <v-spacer></v-spacer>
-       <li class="nav-item" push-left>
+        <router-link to='/login'>
+       <li class="nav-item">
         <a class="nav-link" href="#">Login</a>
       </li>
+      
+        </router-link>
      
      
     </ul>
@@ -45,6 +62,9 @@
   </div>
   </div>
 </nav>
+
+
+
 </template>
 
 <script>
@@ -127,7 +147,8 @@ navbar-light .navbar-nav .action > .nav-link, .navbar-light .navbar-nav .nav-lin
         padding: 1px 5px;
         font-size: 18px;
         line-height: 0.3;
-        background: #fff
+        background: #fff;
+        margin-bottom:auto;
     }
 }
 

@@ -1,11 +1,8 @@
 <template>
    <div>
        <toolbar></toolbar>
-       <carousel></carousel>
-       <ourcompany></ourcompany>
-       <advertiser></advertiser>
-       <meetourteam></meetourteam>
-       <login></login>
+       
+       <router-view></router-view>
        <footers></footers>
        
    </div>
@@ -13,15 +10,14 @@
 
 <script>
 import toolbar from './Toolbar';
-import carousel from './Carousel';
-import ourcompany from './Ourcompany';
-import advertiser from './Advertiser';
-import meetourteam from './MeetourTeam';
-import login from './login/Login';
 import footers from './Footer';
+import login from './login/Login';
+import Publishersignup from './login/PublisherSignup';
+import ActualPublisherSingUp from './login/pubSignup/ActualPublisherSingUp';
+import advertisersignup from './login/advertiser/AdvertiserSignup';
 
 export default {
-    components:{toolbar,  carousel, ourcompany, advertiser, meetourteam, footers, login},
+    components:{toolbar,  footers, login, Publishersignup, ActualPublisherSingUp, advertisersignup},
     
 }
 </script>
