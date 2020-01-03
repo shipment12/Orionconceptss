@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable();
             $table->string('firstName');
             $table->string('lastName');
             $table->string('location');
@@ -26,7 +27,8 @@ class CreateUsersTable extends Migration
             $table->boolean('terms_condition')->default(0);
            
             $table->string('email')->unique();
-            $table->enum('role',['publisher', 'advertiser','admin'])->default('publisher');
+            $table->integer('role')->default(1);
+            // $table->enum('role',['publisher', 'advertiser','admin'])->default('publisher');
            
             $table->string('password');
             $table->rememberToken();

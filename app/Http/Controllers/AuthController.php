@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -14,7 +17,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'Signup']]);
     }
 
     /**
@@ -31,6 +34,44 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
+    }
+
+
+
+    public function Signup(Request $request)
+    {
+        
+        
+        $v = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users',
+            'password'  => 'required|min:8',
+            'phone' => 'required|min:11|numeric',
+
+
+        ]);
+
+        if ($v->fails())
+        {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $v->errors()
+            ], 422);
+        }
+
+
+        User::create($request->all());
+        return $this->login($request);
+
+
+    }
+
+    public function user(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        return response()->json([
+            'status' => 'success',
+            'data' => $user
+        ]);
     }
 
     /**
@@ -79,5 +120,11 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+
+    private function guard()
+    {
+        return Auth::guard();
     }
 }

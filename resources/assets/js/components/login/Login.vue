@@ -13,12 +13,13 @@
     <v-card-text class="text--primary">
       <div id="app">
   <v-app id="inspire">
-    <form>
+    <form @submit.prevent="login">
      
       <v-text-field
       
         label="E-mail"
         required
+        v-model="form.email"
       ></v-text-field>
       <v-text-field
             
@@ -28,11 +29,12 @@
             name="input-10-1"
             label="Normal with hint text"
             hint="At least 8 characters"
+            v-model="form.password"
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
 
-           <button type="button" id="login-button" class="btn btn-primary btn-block btn-flat">Login</button> <hr>
+           <button type="submit" id="login-button" class="btn btn-primary btn-block btn-flat">Login</button> <hr>
       <v-checkbox
 
       
@@ -109,6 +111,17 @@ export default {
           min: v => v.length >= 8 || 'Min 8 characters',
           emailMatch: () => ('The email and password you entered don\'t match'),
         },
+
+        form:{
+          email:null,
+          password:null
+        },
+
+        login(){
+          axios.post('/api/auth/login', this.form)
+          .then(res=>console.log(res.data))
+          .catch(error=>console.log(error.response.data))
+        }
       }
     },
     

@@ -23,10 +23,10 @@ $factory->define(App\User::class, function (Faker $faker) {
                 'website' =>$faker->url,
                 'terms_condition' =>$faker->Boolean,
                 
-                
+                'role'=>$faker->Boolean(1,2),
                 'im' =>$faker->Company,
                 'im_account'=>$faker->Company,
-                'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+                 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
                 'remember_token' => str_random(10),
     ];
 });

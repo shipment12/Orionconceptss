@@ -89017,6 +89017,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -89036,6 +89038,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         emailMatch: function emailMatch() {
           return 'The email and password you entered don\'t match';
         }
+      },
+
+      form: {
+        email: null,
+        password: null
+      },
+
+      login: function login() {
+        axios.post('/api/auth/login', this.form).then(function (res) {
+          return console.log(res.data);
+        }).catch(function (error) {
+          return console.log(error.response.data);
+        });
       }
     };
   }
@@ -89078,9 +89093,24 @@ var render = function() {
                 _c("v-app", { attrs: { id: "inspire" } }, [
                   _c(
                     "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.login($event)
+                        }
+                      }
+                    },
                     [
                       _c("v-text-field", {
-                        attrs: { label: "E-mail", required: "" }
+                        attrs: { label: "E-mail", required: "" },
+                        model: {
+                          value: _vm.form.email,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "email", $$v)
+                          },
+                          expression: "form.email"
+                        }
                       }),
                       _vm._v(" "),
                       _c("v-text-field", {
@@ -89096,6 +89126,13 @@ var render = function() {
                           "click:append": function($event) {
                             _vm.show1 = !_vm.show1
                           }
+                        },
+                        model: {
+                          value: _vm.form.password,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "password", $$v)
+                          },
+                          expression: "form.password"
                         }
                       }),
                       _vm._v(" "),
@@ -89103,7 +89140,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-primary btn-block btn-flat",
-                          attrs: { type: "button", id: "login-button" }
+                          attrs: { type: "submit", id: "login-button" }
                         },
                         [_vm._v("Login")]
                       ),
