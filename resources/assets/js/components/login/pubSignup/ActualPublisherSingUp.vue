@@ -10,7 +10,7 @@
 
     <v-card-subtitle class="pb-0" justify="center"> <h2> Orion Concepts  </h2></v-card-subtitle>
 
-     <v-form v-model="valid">
+     <form  @submit.prevent="signup">
     <v-container>
       <v-row>
         <v-col cols="12" sm="6">
@@ -20,7 +20,10 @@
           outlined
           rows="1"
           row-height="10"
+          v-model="form.firstName"
         ></v-textarea>
+
+      <span class="red--text" v-if="errors.firstName">{{errors.firstName[0]}}</span>
       </v-col>
 
         <v-col cols="12" sm="6">
@@ -30,25 +33,29 @@
           outlined
           rows="1"
           row-height="10"
+           v-model="form.lastName"
         ></v-textarea>
+        <span class="red--text" v-if="errors.lastName">{{errors.lastName[0]}}</span>
       </v-col>
 
        <v-col cols="12" sm="12">
         <v-textarea
           label="Email"
-          :rules="[rules.email]"
+         
           auto-grow
           outlined
           rows="1"
           row-height="10"
+           v-model="form.email"
         ></v-textarea>
+         <span class="red--text" v-if="errors.email">{{errors.email[0]}}</span>
       </v-col>
 
       <v-col cols="9" sm="9">
         <v-textarea
           label="Password"
           
-          :rules="[rules.password, rules.length(6)]"
+          
           auto-grow
           outlined
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -59,8 +66,10 @@
             @click:append="show1 = !show1"
           rows="1"
           row-height="10"
+           v-model="form.password"
           
         ></v-textarea>
+         <span class="red--text" v-if="errors.password">{{errors.password[0]}}</span>
       </v-col>
 
      
@@ -68,12 +77,16 @@
       <v-col class="d-flex" cols="12" sm="12">
         <v-select
 
-           v-model="e1"
+           v-model="form.location"
           :items="states"
           label="Location"
           outlined
           prepend-icon="map"
+           
+           
         ></v-select>
+
+        <span class="red--text" v-if="errors.location">{{errors.location[0]}}</span>
       </v-col>
 
 
@@ -85,7 +98,9 @@
           outlined
           rows="1"
           row-height="10"
+           v-model="form.company"
         ></v-textarea>
+         <span class="red--text" v-if="errors.company">{{errors.company[0]}}</span>
       </v-col>
 
 
@@ -96,8 +111,10 @@
           :items="items"
           label="IM"
           outlined
+           v-model="form.im"
          
         ></v-select>
+        <span class="red--text" v-if="errors.im">{{errors.im[0]}}</span>
       </v-col>
 
       <v-col cols="12" sm="6">
@@ -108,7 +125,9 @@
           outlined
           rows="1"
           row-height="10"
+           v-model="form.im_account"
         ></v-textarea>
+         <span class="red--text" v-if="errors.im_account">{{errors.im_account[0]}}</span>
       </v-col>
 
 
@@ -120,7 +139,9 @@
           outlined
           rows="1"
           row-height="10"
+           v-model="form.phone"
         ></v-textarea>
+         <span class="red--text" v-if="errors.phone">{{errors.phone[0]}}</span>
       </v-col>
 
 
@@ -132,13 +153,15 @@
           outlined
           rows="1"
           row-height="10"
+           v-model="form.website"
         ></v-textarea>
+         <span class="red--text" v-if="errors.website">{{errors.website[0]}}</span>
       </v-col>
 
 
      <v-col cols="12">
             <v-checkbox
-              v-model="form.terms"
+              v-model="form.terms_condition"
               color="green"
             >
               <template v-slot:label>
@@ -148,8 +171,10 @@
                   and
                   <a href="javascript:;" @click.stop="conditions = true">conditions?</a>
                 </div>
+                 
               </template>
             </v-checkbox>
+            <span class="red--text" v-if="errors.terms_condition">{{errors.terms_condition[0]}}</span>
           </v-col>
 
 
@@ -158,9 +183,8 @@
         
       </v-row>
     </v-container>
-  </v-form>
 
-  <v-dialog v-model="terms" width="70%">
+    <v-dialog v-model="terms" width="70%">
       <v-card>
         <v-card-title class="title">Terms</v-card-title>
         <v-card-text v-for="n in 5" :key="n">
@@ -190,11 +214,20 @@
             @click="conditions = false"
           >Ok</v-btn>
         </v-card-actions>
+
+
+        
       </v-card>
+
     </v-dialog>
 
+     <button type="submit" id="login-button" class="btn btn-primary btn-block btn-flat">Publisher Signup</button>
+
  
-           <button type="button" id="login-button" class="btn btn-primary btn-block btn-flat">Publisher Signup</button>
+          
+  </form>
+
+  
 
     
   </v-card>
@@ -208,13 +241,45 @@ export default {
 
   
     
-    data: () => ({
+    data(){
+      return{
+        form:{
+           firstName:null,
+        lastName:null,
+        email:null,
+        password:null,
+        location:null,
+        company:null,
+        im:null,
+        im_account:null,
+        phone:null,
+        terms_condition:true,
+        },
 
-   
-      
-      email: undefined,
-      form: false,
-       show1: false,
+        errors:{},
+
+
+         
+             signup(){
+           axios.post('/api/auth/signup', this.form)
+           .then(res=> {User.responseAfterLogin(res)
+           if(authUser.data.role.role==2){
+             this.$router.push({name:'publisherdashboard'})
+           }
+            
+           })
+           
+           
+           .catch(error=> this.errors = error.response.data.errors)
+          
+        
+
+          },
+        
+         
+
+
+        show1: false,
         show2: true,
         show3: false,
         show4: false,
@@ -255,16 +320,24 @@ export default {
       
       
       phone: undefined,
-      rules: {
-        email: v => (v || '').match(/@/) || 'Please enter a valid email',
-        length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
-        password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
-          'Password must contain an upper case letter, a numeric character, and a special character',
-        required: v => !!v || 'This field is required',
-      },
+      // rules: {
+      //   email: v => (v || '').match(/@/) || 'Please enter a valid email',
+      //   length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
+      //   password: v => (v || '').match(/^(?=.*[a-z])(?=.*(_|[^\w])).+$/) ||
+      //     'Password must  a numeric character, and a special character',
+      //   required: v => !!v || 'This field is required',
+      // },
 
       
-    }),
+    
+
+      }
+    }
+
+   
+      
+    
+
 
     
 
@@ -279,5 +352,6 @@ export default {
 </script>
 
 <style scoped>
+
 
 </style>

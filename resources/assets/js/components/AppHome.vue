@@ -15,9 +15,10 @@ import login from './login/Login';
 import Publishersignup from './login/PublisherSignup';
 import ActualPublisherSingUp from './login/pubSignup/ActualPublisherSingUp';
 import advertisersignup from './login/advertiser/AdvertiserSignup';
+import publisherdashboard from './dashboard/PublisherDashboard';
 
 export default {
-    components:{toolbar,  footers, login, Publishersignup, ActualPublisherSingUp, advertisersignup},
+    components:{toolbar,  footers, login, Publishersignup, ActualPublisherSingUp, advertisersignup, publisherdashboard},
     
 }
 </script>

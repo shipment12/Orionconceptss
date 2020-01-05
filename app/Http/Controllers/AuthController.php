@@ -46,6 +46,14 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password'  => 'required|min:8',
             'phone' => 'required|min:11|numeric',
+            'firstName'=>'required',
+            'lastName'=>'required',
+            'company'=>'required',
+            'im_account'=>'required',
+            'terms_condition'=>'required',
+            'website'=>'required',
+            'location'=>'required',
+            'im'=>'required'
 
 
         ]);
@@ -57,6 +65,8 @@ class AuthController extends Controller
                 'errors' => $v->errors()
             ], 422);
         }
+
+        
 
 
         User::create($request->all());

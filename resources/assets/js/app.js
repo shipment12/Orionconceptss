@@ -17,6 +17,11 @@ import Vuetify from 'vuetify'
 
 Vue.use(Vuetify)
 
+import User from './Helpers/User';
+
+window.User = User;
+
+console.log(User.loggedIn());
 
 
 /**
@@ -30,6 +35,7 @@ Vue.component('AppHome', require('./components/AppHome.vue'));
 
 
 import router from './Router/router.js';
+
 const app = new Vue({
 	el: '#app',
 	router,

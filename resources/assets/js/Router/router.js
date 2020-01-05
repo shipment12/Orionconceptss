@@ -9,6 +9,7 @@ import Advertiser from '../components/Advertiser';
 import PublisherSignup from '../components/login/PublisherSignup';
 import ActualPublisherSingUp from '../components/login/pubSignup/ActualPublisherSingUp';
 import AdvertiserSignup from '../components/login/advertiser/AdvertiserSignup';
+import PublisherDashboard from '../components/dashboard/PublisherDashboard';
 
 const routes = [
     { path: '/', component: LandingPage },
@@ -17,7 +18,8 @@ const routes = [
      {path: '/advertiser', component: Advertiser},
      {path: '/publishersignup', component: PublisherSignup},
      {path: '/actualpublishersingup', component: ActualPublisherSingUp},
-     {path: '/advertisersignup', component: AdvertiserSignup}
+     {path: '/advertisersignup', component: AdvertiserSignup},
+     {path: '/publisherdashboard', component: PublisherDashboard, name:'publisherdashboard'},
   ]
 
   const router = new VueRouter({
